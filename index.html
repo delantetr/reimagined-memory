@@ -4,26 +4,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Assets/style.css">
     <title>Coding Quiz</title>
 </head>
 <body>
-    <header>
-      <a href="#highscores">View Highscores</a>
-      <div id="timer">Time: <span id="timer-count"></span></div>
-    </header>
-    <main id="main">
-        <h1>Coding Quiz</h1>
-        <div id="questions"></div>
-        <div id="answers"></div>
-        <div id="feedback"></div>
-        <div id="score"></div>
-        <div id="initials"></div>
-        <button id="start-button">Start</button>
-        
-        <div id="highscores">
-          <ul id="highscores-list"></ul>
-        </div>
-    </main>
-    <script src="./Assets/script.js"></script>
+  <header>
+    <h1>Coding Quiz</h1>
+    <p id="timer">Time: <span id="time-remaining"></span></p>
+    <a id="view-highscores" href="#highscores-container">View Highscores</a>
+  </header>
+
+  <!-- Start Screen -->
+  <section id="start-window">
+    <button id="start-button">Start</button>
+  </section>
+
+  <!-- Quiz Window -->
+  <section id="quiz-window">
+    <h2 id="questions"></h2>
+    <ul id="answers"></ul>
+    <p id="feedback"></p>
+  </section>
+
+  <!-- Result Window -->
+  <section id="result-window">
+    <h2>All done!</h2>
+    <p>Your final score is <span id="final-score"></span>.</p>
+    <form id="score-form">
+      <label for="initials">Enter your initials:</label>
+      <input type="text" id="initials" maxlength="3" required>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <!-- Highscores Window -->
+  <section id="highscores-container">
+    <h2>High Scores</h2>
+  </section>
+
+  <script src="./Assets/script.js"></script>
 </body>
 </html>
