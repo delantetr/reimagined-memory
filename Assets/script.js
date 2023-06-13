@@ -51,7 +51,7 @@ var resultWindow = document.getElementById("result-window");
 var scoreWindow = document.getElementById('final-score');
 var scoreForm = document.getElementById("score-form");
 var initialsContainer = document.getElementById('initials');
-// var viewHighscoresButton = document.getElementById('view-highscores');
+var viewHighscoresButton = document.getElementById('view-highscores');
 var highscoresList = document.getElementById('highscores-list');
 var highscoresWindow = document.getElementById('highscores-container');
 
@@ -151,12 +151,13 @@ function saveScore(event) {
   event.preventDefault();
 
   initialsContainer.value.toUpperCase();
-  // Save initials and score to storage or perform any desired action here
-  var initials = document.querySelector(initialsContainer.value);
-  localStorage.setItem("initials", initials);
-  // Example code to display the saved score:
+  // Save initials and score to storage
+  var initials = initialsContainer.value;
+  localStorage.setItem("Initials", initials);
+  localStorage.setItem("Score", score);
+  
   var highScoresElement = document.createElement("p");
-  initialsContainer = initials + ": " + score;
+  highScoresElement.textContent = initials + ": " + score;
   highscoresWindow.appendChild(highScoresElement);
 
   var scoreForm = document.getElementById("score-form");
@@ -165,24 +166,29 @@ function saveScore(event) {
 
 
 
+viewHighscoresButton.addEventListener('click', printHighScores);
+
 // Function to print high scores
-// function printHighScores() {
-//   highscoresWindow.style.display = 'block';
-//   highscoresList.innerHTML = '';
+function printHighScores() {
+  startButton.style.display = 'none';
+  highscoresWindow.style.display = 'block';
+  highscoresList.innerHTML = '';
 
-//   // Retrieve scores from localStorage
-//   getScoresFromLocalStorage();
+  // Retrieve scores from localStorage
+  var scoreData = localStorage.getItem("Score")
 
-//   // Sort scores in descending order
-//   scores.sort((a, b) => b.score - a.score);
+  // Sort scores in descending order
+  scores.sort((a, b) => b.score - a.score);
 
-//   // Display the high scores
-//   for (var i = 0; i < scores.length; i++) {
-//     var scoreItem = document.createElement('li');
-//     scoreItem.textContent = scores[i].initials + ' - ' + scores[i].score;
-//     highscoresList.appendChild(scoreItem);
-//   }
+  // Display the high scores
+  if (scoreData) {
+    var scores = JSON.parse(scoreData);
+    for (var i = 0; i < scores.length; i++) {
+      var scoreItem = document.createElement('li');
+      scoreItem.textContent = scores[i].initials + ' - ' + scores[i].score;
+      highscoresList.appendChild(scoreItem);
+  }
+  }
+ 
 
-//   viewHighscoresButton.addEventListener('click', printHighScores);
-
-// }
+}
