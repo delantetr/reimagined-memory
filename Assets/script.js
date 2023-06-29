@@ -51,6 +51,8 @@ var timerEl = document.getElementById("time-remaining");
 var resultWindow = document.getElementById("result-window");
 var scoreWindow = document.getElementById('final-score');
 var scoreForm = document.getElementById("score-form");
+var initialsContainer = document.getElementById('initials');
+var viewHighscoresButton = document.getElementById('view-highscores');
 var highscoresList = document.getElementById('highscores-list');
 var highscoresWindow = document.getElementById('highscores-container');
 var highscoresTitle = document.getElementById('highscores-title');
@@ -155,19 +157,21 @@ function endQuiz() {
 
 // 8.------------------------------------------------------------------------
 
-    function saveScore() {
-      var initialsContainer = document.getElementById('initials').value.toUpperCase();
-  
-      localStorage.setItem("initials", initialsContainer);
-      localStorage.setItem("score", score);
-  
-      var highScoresElement = document.createElement("p");
-      highScoresElement.textContent = initialsContainer + ": " + score;
-  
-      highscoresWindow.style.display = 'block';
-      highscoresWindow.appendChild(highScoresElement);
-  
-      highscoresTitle.style.display = 'block';
+//   // Retrieve scores from localStorage
+//   getScoresFromLocalStorage();
+
+//   // Sort scores in descending order
+//   scores.sort((a, b) => b.score - a.score);
+
+//   // Display the high scores
+//   for (var i = 0; i < scores.length; i++) {
+//     var scoreItem = document.createElement('li');
+//     scoreItem.textContent = scores[i].initials + ' - ' + scores[i].score;
+//     highscoresList.appendChild(scoreItem);
+//   }
+
+//   viewHighscoresButton.addEventListener('click', printHighScores);
+
+// }
 
     }
-}
