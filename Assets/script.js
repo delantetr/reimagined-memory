@@ -7,6 +7,7 @@
 // 6. When all questions are answered end game.
 // 7. When timer reaches 0, end game
 // 8. When game is over save intials and score
+// 9. Show high scores
 // ------------------------------------------------------------------------------------------------
 
 var questions = [
@@ -50,23 +51,21 @@ var timerEl = document.getElementById("time-remaining");
 var resultWindow = document.getElementById("result-window");
 var scoreWindow = document.getElementById('final-score');
 var scoreForm = document.getElementById("score-form");
-var initialsContainer = document.getElementById('initials');
-// var viewHighscoresButton = document.getElementById('view-highscores');
 var highscoresList = document.getElementById('highscores-list');
 var highscoresWindow = document.getElementById('highscores-container');
+var highscoresTitle = document.getElementById('highscores-title');
 
 
 var currentQuestionIndex = 0;
 var score = 0;
 var timeRemaining = 75;
-var timer;
+var timerInterval;
 var scores = [];
 
-
+highscoresTitle.style.display = 'none';
 
 // 1.------------------------------------------------------------------------
 function startGame() {
-    // Test to make sure the click is being recieved.
     console.log("Click Confirmed");
     startWindow.style.display = "none";
     quiz.style.display = "block";
@@ -78,6 +77,7 @@ startButton.addEventListener("click", startGame);
 
 // 2.--------------------------------------------------------------
 function startTimer() {
+  clearInterval(timerInterval);
   timerInterval = setInterval(function() {
     timeRemaining--;
     timerEl.textContent = timeRemaining;
@@ -93,10 +93,8 @@ function showQuestion() {
   var currentQuestion = questions[currentQuestionIndex];
   questionWindow.textContent = currentQuestion.question;
 
-  // Clear previous options
   answersWindow.innerHTML = '';
 
-  // Create option buttons for the current question
   for (let i = 0; i < currentQuestion.options.length; i++) {
     var choice = currentQuestion.options[i];
     var li = document.createElement("li");
@@ -139,50 +137,37 @@ function checkAnswer(event) {
 // 7.----------------------------------------------------------------
 function endQuiz() {
   quiz.style.display = 'none';
-  resultWindow.style.display = "block";
+  resultWindow.style.display = 'block';
   timerEl.style.display = 'none';
   scoreWindow.textContent = score;
 
-  scoreForm.addEventListener("submit", saveScore);
+  scoreForm.style.display = 'block';
+
+  scoreForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+    saveScore();
+    resultWindow.style.display = 'none';
+    scoreForm.style.display = 'none';
+    location.reload();
+  
+    
+  });
+
+// 8.------------------------------------------------------------------------
+
+    function saveScore() {
+      var initialsContainer = document.getElementById('initials').value.toUpperCase();
+  
+      localStorage.setItem("initials", initialsContainer);
+      localStorage.setItem("score", score);
+  
+      var highScoresElement = document.createElement("p");
+      highScoresElement.textContent = initialsContainer + ": " + score;
+  
+      highscoresWindow.style.display = 'block';
+      highscoresWindow.appendChild(highScoresElement);
+  
+      highscoresTitle.style.display = 'block';
+
+    }
 }
-
-// 8.---------------------------------------------------------------
-function saveScore(event) {
-  event.preventDefault();
-
-  initialsContainer.value.toUpperCase();
-  // Save initials and score to storage or perform any desired action here
-  var initials = document.querySelector(initialsContainer.value);
-  localStorage.setItem("initials", initials);
-  // Example code to display the saved score:
-  var highScoresElement = document.createElement("p");
-  initialsContainer = initials + ": " + score;
-  highscoresWindow.appendChild(highScoresElement);
-
-  var scoreForm = document.getElementById("score-form");
-  scoreForm.style.display = "none";
-}
-
-
-
-// Function to print high scores
-// function printHighScores() {
-//   highscoresWindow.style.display = 'block';
-//   highscoresList.innerHTML = '';
-
-//   // Retrieve scores from localStorage
-//   getScoresFromLocalStorage();
-
-//   // Sort scores in descending order
-//   scores.sort((a, b) => b.score - a.score);
-
-//   // Display the high scores
-//   for (var i = 0; i < scores.length; i++) {
-//     var scoreItem = document.createElement('li');
-//     scoreItem.textContent = scores[i].initials + ' - ' + scores[i].score;
-//     highscoresList.appendChild(scoreItem);
-//   }
-
-//   viewHighscoresButton.addEventListener('click', printHighScores);
-
-// }
