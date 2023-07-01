@@ -11,7 +11,6 @@
   <header>
     <h1>Coding Quiz</h1>
     <p id="timer">Time: <span id="time-remaining"></span></p>
-    <a id="view-highscores" href="#highscores-container">View Highscores</a>
   </header>
 
   <!-- Start Screen -->
@@ -31,8 +30,7 @@
     <h2>All done!</h2>
     <p>Your final score is <span id="final-score"></span>.</p>
     <form id="score-form">
-      <label for="initials">Enter your initials:</label>
-      <input type="text" id="initials" maxlength="3" required>
+      <input type="text" id="initials" placeholder="Enter initials" />
       <button type="submit">Submit</button>
     </form>
     <button id="play-again-button">Play Again</button>
@@ -40,7 +38,7 @@
 
   <!-- Highscores Window -->
   <section id="highscores-container">
-    <h2>High Scores</h2>
+    <h2 id="highscores-title">High Scores</h2>
     <ul id="highscores-list"></ul>
     <button id="home-button" href="start-window">Back To Home</button>
   </section>

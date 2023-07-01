@@ -7,6 +7,7 @@
 // 6. When all questions are answered end game.
 // 7. When timer reaches 0, end game
 // 8. When game is over save intials and score
+// 9. Show high scores
 // ------------------------------------------------------------------------------------------------
 
 var questions = [
@@ -68,7 +69,6 @@ highscoresWindow.style.display = 'none';
 
 // 1.------------------------------------------------------------------------
 function startGame() {
-    // Test to make sure the click is being recieved.
     console.log("Click Confirmed");
     startWindow.style.display = "none";
     quiz.style.display = "block";
@@ -82,6 +82,7 @@ function startGame() {
 
 // 2.--------------------------------------------------------------
 function startTimer() {
+  clearInterval(timerInterval);
   timerInterval = setInterval(function() {
     timeRemaining--;
     timerEl.textContent = timeRemaining;
@@ -98,10 +99,8 @@ function showQuestion() {
   var currentQuestion = questions[currentQuestionIndex];
   questionWindow.textContent = currentQuestion.question;
 
-  // Clear previous options
   answersWindow.innerHTML = '';
 
-  // Create option buttons for the current question
   for (let i = 0; i < currentQuestion.options.length; i++) {
     var choice = currentQuestion.options[i];
     var li = document.createElement("li");
@@ -146,7 +145,7 @@ function checkAnswer(event) {
 function endQuiz() {
   clearInterval(timerInterval);
   quiz.style.display = 'none';
-  resultWindow.style.display = "block";
+  resultWindow.style.display = 'block';
   timerEl.style.display = 'none';
   scoreWindow.textContent = score;
 
@@ -191,15 +190,16 @@ function saveScore(event) {
   scoreForm.style.display = "none";
 }
 
+//   // Retrieve scores from localStorage
+//   getScoresFromLocalStorage();
 
 
-
-
-// Function to print high scores
-function printHighScores() {
-  startButton.style.display = 'none';
-  highscoresWindow.style.display = 'block';
-  highscoresList.innerHTML = '';
+//   // Display the high scores
+//   for (var i = 0; i < scores.length; i++) {
+//     var scoreItem = document.createElement('li');
+//     scoreItem.textContent = scores[i].initials + ' - ' + scores[i].score;
+//     highscoresList.appendChild(scoreItem);
+//   }
 
   // Retrieve scores from localStorage
   var scoreData = localStorage.getItem("Score");
