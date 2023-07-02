@@ -19,7 +19,7 @@
   N/A
 
   ## Usage
-  ![alt text](./assets/Coding-Quiz.gif)
+  ![alt text](./Assets/Coding-Quiz.gif)
 
   ## License
   MIT
