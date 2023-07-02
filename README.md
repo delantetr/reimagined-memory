@@ -19,6 +19,8 @@
   N/A
 
   ## Usage
+  GitPages URL: https://delantetr.github.io/reimagined-memory/
+  
   ![alt text](./Assets/Coding-Quiz.gif)
 
   ## License
