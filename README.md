@@ -4,7 +4,8 @@
   [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
   ## Description
-  This challenge project demonstrates the ability to create a README.md file using javascript.
+  This challenge project creates a timed quiz on JavaScript fundamentals that stores high scores so that I can gauge my progress compared to my peers. This will help to familiarize myself with the coding assessment typically given during an interview process.
+
 
   ## Table of Contents 
   - [Installation](#installation)
@@ -18,7 +19,7 @@
   N/A
 
   ## Usage
-  ![alt text](./assets/Challenge-9-GIF.gif)
+  ![alt text](./assets/Coding-Quiz.gif)
 
   ## License
   MIT
